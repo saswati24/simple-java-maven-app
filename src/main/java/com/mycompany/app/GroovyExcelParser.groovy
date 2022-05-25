@@ -122,7 +122,7 @@ class GroovyExcelParser {
         String strDate = dateFormat.format(date);
         System.out.println("Current Date: " + strDate);
 
-        def col_index = -1
+        def col_index = null
 
         def filename = 'temp.xlsx'
         def envname = 'CT0A'
@@ -138,42 +138,46 @@ class GroovyExcelParser {
                 col_index = index
             }
         }
+        if (col_index != null) {
 //        println '\nRows'
 //        println '------------------'
-        def ld_dates = null
-        def ld_no = null
-        for(int i = 0; i < rows.size(); i++) {
-            def row = rows[i]
+            def ld_dates = null
+            def ld_no = null
+            for (int i = 0; i < rows.size(); i++) {
+                def row = rows[i]
 //            println parser.toXml(headers, row)
-            if (row[0] !=null && row[0] == envname ){
-                ld_dates = rows[i-1][col_index]
-                println 'LD Dates found : ' +  ld_dates
+                if (row[0] != null && row[0] == envname) {
+                    ld_dates = rows[i - 1][col_index]
+                    println 'LD Dates found : ' + ld_dates
 
-                ld_no = rows[i-2][col_index]
-                println 'LD Number found : ' +  ld_no
-                break
+                    ld_no = rows[i - 2][col_index]
+                    println 'LD Number found : ' + ld_no
+                    break
+                }
             }
-        }
 
-        def ld_no_final = null
-        String[] values = ld_no.split('/')
-        for( String value : values ) {
-            if (value.matches('.*B$')) {
-                ld_no_final = 'LD' + (value =~ "[0-9]+")[0] + '_Batch'
+            def ld_no_final = null
+            String[] values = ld_no.split('/')
+            for (String value : values) {
+                if (value.matches('.*B$')) {
+                    ld_no_final = 'LD' + (value =~ "[0-9]+")[0] + '_Batch'
+                }
             }
-        }
-        println 'Final LD No: ' + ld_no_final
+            println 'Final LD No: ' + ld_no_final
 
-        def ld_dates_final_list = []
-        def ld_dates_final = null
-        for(String date_data : ld_dates.split(',')) {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE dd/MM/yyyy", Locale.ENGLISH);
-            ld_dates_final_list << LocalDate.parse(date_data.trim(), formatter);
+            def ld_dates_final_list = []
+            def ld_dates_final = null
+            for (String date_data : ld_dates.split(',')) {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE dd/MM/yyyy", Locale.ENGLISH);
+                ld_dates_final_list << LocalDate.parse(date_data.trim(), formatter);
+            }
+            ld_dates_final = ld_dates_final_list[0]
+            if (ld_dates_final_list.size() > 1 && ld_dates_final_list[0].isAfter(ld_dates_final_list[1])) {
+                ld_dates_final = ld_dates_final_list[1]
+            }
+            println 'Final LD Date: ' + ld_dates_final
+        }else {
+            println "For current date there is no entry"
         }
-        ld_dates_final = ld_dates_final_list[0]
-        if(ld_dates_final_list.size() > 1 && ld_dates_final_list[0].isAfter(ld_dates_final_list[1])){
-            ld_dates_final = ld_dates_final_list[1]
-        }
-        println 'Final LD Date: ' + ld_dates_final
     }
 }
