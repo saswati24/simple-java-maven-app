@@ -6,8 +6,8 @@ import org.apache.poi.ss.usermodel.CellType
 import org.apache.poi.ss.usermodel.DateUtil
 import org.apache.poi.ss.usermodel.Row
 import org.apache.poi.ss.util.CellReference
-import org.apache.poi.xssf.usermodel.XSSFSheet
-import org.apache.poi.xssf.usermodel.XSSFWorkbook
+import org.apache.poi.hssf.usermodel.HSSFSheet
+import org.apache.poi.hssf.usermodel.HSSFWorkbook
 
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -24,9 +24,9 @@ class GroovyExcelParser {
 
         // Create Workbook instance holding reference to
         // .xlsx file
-        XSSFWorkbook workbook = new XSSFWorkbook(file);
+        HSSFWorkbook workbook = new HSSFWorkbook(file);
         // Get first/desired sheet from the workbook
-        XSSFSheet sheet = workbook.getSheetAt(0);
+        HSSFSheet sheet = workbook.getSheetAt(0);
 
         // Iterate through each rows one by one
         Iterator<Row> rowIterator = sheet.iterator();
@@ -124,7 +124,7 @@ class GroovyExcelParser {
 
         def col_index = null
 
-        def filename = 'temp.xlsx'
+        def filename = 'temp.xls'
         def envname = 'CT0A'
 
         GroovyExcelParser parser = new GroovyExcelParser()
