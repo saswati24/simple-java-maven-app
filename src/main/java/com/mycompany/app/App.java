@@ -18,8 +18,8 @@ public class App
         final GroovyClassLoader classLoader = new GroovyClassLoader();
 
         // Load Groovy script file.
-        groovy = classLoader.parseClass(new File("src/main/java/com/mycompany/app/GroovyExcelParser.groovy"));
-        groovyObj = (GroovyObject) groovy.newInstance();
+        Class groovy = classLoader.parseClass(new File("src/main/java/com/mycompany/app/GroovyExcelParser.groovy"));
+        GroovyObject groovyObj = (GroovyObject) groovy.newInstance();
         groovyObj.invokeMethod("main", new String[]{});
 //        assert "Hello mrhaki, from Groovy. Hello mrhaki, from Groovy. ".equals(output);
     }
