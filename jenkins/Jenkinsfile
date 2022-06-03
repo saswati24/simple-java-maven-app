@@ -15,8 +15,8 @@ pipeline {
                 url: 'https://github.com/saswati24/simple-java-maven-app.git'
 
                 sh "ls -lat"
-                sh "mvn clean package"
-                sh "java -jar target/my-app-1.0-SNAPSHOT-jar-with-dependencies.jar"
+                sh "mvn clean install"
+                sh "java -jar target/my-app-1.0-SNAPSHOT-jar-with-dependencies.jar sash bhaduri"
                 }
         }
         stage('test') {

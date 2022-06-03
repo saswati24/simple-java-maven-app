@@ -116,7 +116,10 @@ class GroovyExcelParser {
 
 //        File file = new File(".");
 //        for(String fileNames : file.list()) System.out.println(fileNames);
-
+        System.out.println("Command-line arguments Inside Groovy file:");
+        for (String arg : args) {
+           System.out.println(arg);
+        }
         Date date = Calendar.getInstance().getTime();
         DateFormat dateFormat = new SimpleDateFormat("EEE dd/MM/yyyy");
         String strDate = dateFormat.format(date);

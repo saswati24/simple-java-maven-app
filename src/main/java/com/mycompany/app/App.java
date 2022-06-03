@@ -14,13 +14,20 @@ public class App
     public App() {}
 
     public static void main(String[] args) throws IOException, InstantiationException, IllegalAccessException {
+          System.out.println("Command-line arguments inside Java file:");
+
+          for (String arg : args) {
+
+                  System.out.println(arg);
+
+          }
         // Create GroovyClassLoader.
         final GroovyClassLoader classLoader = new GroovyClassLoader();
 
         // Load Groovy script file.
         Class groovy = classLoader.parseClass(new File("src/main/java/com/mycompany/app/GroovyExcelParser.groovy"));
         GroovyObject groovyObj = (GroovyObject) groovy.newInstance();
-        groovyObj.invokeMethod("main", new String[]{});
+        groovyObj.invokeMethod("main", args);
 //        assert "Hello mrhaki, from Groovy. Hello mrhaki, from Groovy. ".equals(output);
     }
 
