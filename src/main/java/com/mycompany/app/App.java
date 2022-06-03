@@ -14,7 +14,7 @@ public class App
     public App() {}
 
     public static void main(String[] args) throws IOException, InstantiationException, IllegalAccessException {
-          System.out.println("Command-line arguments:");
+          System.out.println("Command-line arguments inside Java file:");
 
           for (String arg : args) {
 
