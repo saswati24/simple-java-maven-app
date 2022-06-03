@@ -123,8 +123,8 @@ class GroovyExcelParser {
 
         def col_index = null
         
-        def envname = args[0]
-        def filename = args[1]
+        def envname = args[1]
+        def filename = args[2]
         
 
         GroovyExcelParser parser = new GroovyExcelParser()
