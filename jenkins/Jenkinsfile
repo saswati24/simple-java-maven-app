@@ -13,10 +13,12 @@ pipeline {
                 git branch: 'master',
                 credentialsId: 'github-cred',
                 url: 'https://github.com/saswati24/simple-java-maven-app.git'
-
+                
+                sh "rm -rf Output"
+                sh "mkdir Output"
                 sh "ls -lat"
                 sh "mvn clean install"
-                sh "java -jar target/my-app-1.0-SNAPSHOT-jar-with-dependencies.jar sash bhaduri"
+                sh "java -jar target/my-app-1.0-SNAPSHOT-jar-with-dependencies.jar CT0A temp.xls"
                 }
         }
         stage('test') {

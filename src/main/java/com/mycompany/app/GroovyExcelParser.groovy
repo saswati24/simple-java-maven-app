@@ -116,19 +116,16 @@ class GroovyExcelParser {
 
 //        File file = new File(".");
 //        for(String fileNames : file.list()) System.out.println(fileNames);
-        System.out.println("Command-line arguments Inside Groovy file:");
-        for (String arg : args) {
-           System.out.println(arg);
-        }
         Date date = Calendar.getInstance().getTime();
         DateFormat dateFormat = new SimpleDateFormat("EEE dd/MM/yyyy");
         String strDate = dateFormat.format(date);
         System.out.println("Current Date: " + strDate);
 
         def col_index = null
-
-        def filename = 'temp.xls'
-        def envname = 'CT0A'
+        
+        def envname = args[0]
+        def filename = args[1]
+        
 
         GroovyExcelParser parser = new GroovyExcelParser()
 //        def (headers, rows) = parser.parse(filename)
